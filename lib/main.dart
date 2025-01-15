@@ -1,8 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:video_callig_firebase_agora/firebase_options.dart';
-import 'package:video_callig_firebase_agora/views/signup.dart';
+import 'package:video_callig_firebase_agora/views/auth/login_page.dart';
+import 'package:video_callig_firebase_agora/views/auth/signup.dart';
+import 'package:video_callig_firebase_agora/views/home/home_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,6 +26,8 @@ class MyApp extends StatelessWidget {
           fontFamily: GoogleFonts.ibmPlexSans().fontFamily,
           primarySwatch: Colors.indigo,
         ),
-        home: Signup());
+        home: FirebaseAuth.instance.currentUser == null
+            ? const Login()
+            : const HomePage());
   }
 }
